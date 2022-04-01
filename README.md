@@ -1,5 +1,5 @@
 # Dashboard
-A dashboard created to be used has a tool in Softinsa's day to day work written in Laravel.
+A dashboard created to be used has a tool in the DriverAlert Project.
 
 ## Requisites
  * MySQL Server
