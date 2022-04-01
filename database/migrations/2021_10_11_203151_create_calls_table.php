@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCallsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('calls', function (Blueprint $table) {
+            $table->id();
+            $table->dateTime('time');
+            $table->integer('duration');
+            $table->integer('reply_time');
+            $table->integer('satisfaction_score');
+            $table->string('collaborator');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('calls');
+    }
+}
