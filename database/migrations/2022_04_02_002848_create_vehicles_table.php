@@ -25,6 +25,7 @@ class CreateVehiclesTable extends Migration
             $table->float('torque')->nullable();
             $table->float('engine_cc')->nullable();
             $table->string('vin_numb')->nullable();
+            $table->timestamps();
         });
     }
 
