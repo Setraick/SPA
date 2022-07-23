@@ -28,6 +28,12 @@ class CreateSensordata extends Migration
             $table->float('latitude')->nullable();
             $table->float('longitude')->nullable();
             $table->float('altitude')->nullable();
+            $table->float('humidity')->nullable();
+            $table->float('visibility')->nullable();
+            $table->float('road_type')->nullable();
+            $table->float('weather_description')->nullable();
+            $table->float('current_speed')->nullable();
+            $table->float('id_trip');
             //$table->foreign('id_user')->references('id')->on('users');
             //$table->foreign('id_vehicle')->references('id_vehicle')->on('vehicle');
         });

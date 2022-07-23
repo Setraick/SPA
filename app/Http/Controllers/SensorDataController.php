@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Trip;
+use App\Models\SensorData;
 use Illuminate\Http\Request;
 
-class TripController extends Controller
+class SensorDataController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,36 +14,36 @@ class TripController extends Controller
      */
     public function index()
     {
-        Trip::truncate();
+        SensorData::truncate();
         $response = Http::get('https://driver.jmvalente.pt/index.php/trip/listaruser?iduser=1');
-        $trip = $response->json()['Trip'][0];
+        $sensorData = $response->json()['sensorData'][0];
         return [
-            'id_trip' => $trip['TripID'],
+            'id_trip' => $sensorData['id_trip'],
             //'user_id_user' => $trip ['user_id_user'],
             //'SensorTimestamp' => $trip['SensorTimestamp'],
-            'timestamp_API' => $trip['timestamp_API'],
-            'current_speed' => $trip['Statcurrent_speedeType'],
-            'weather_description' => $trip['weather_description'],
-            'temperature' => $trip['temperature'],
-            'humidity' => $trip['humidity'],
-            'visibility' => $trip['visibility'],
-            'road_type' => $trip['road_type'],
-            'latitude' => $trip['latitude'],
-            'longitude' => $trip['longitude'],
-            'altitude' => $trip['altitude'],
-            'accelerometerX' => $trip['accelerometerX'],
-            'accelerometerY' => $trip['accelerometerY'],
-            'accelerometerZ' => $trip['accelerometerZ'],
-            'name' => $trip['name'],
+            'timestamp_API' => $sensorData['timestamp_API'],
+            'current_speed' => $sensorData['Statcurrent_speedeType'],
+            'weather_description' => $sensorData['weather_description'],
+            'temperature' => $sensorData['temperature'],
+            'humidity' => $sensorData['humidity'],
+            'visibility' => $sensorData['visibility'],
+            'road_type' => $sensorData['road_type'],
+            'latitude' => $sensorData['latitude'],
+            'longitude' => $sensorData['longitude'],
+            'altitude' => $sensorData['altitude'],
+            'accelerometerX' => $sensorData['accelerometerX'],
+            'accelerometerY' => $sensorData['accelerometerY'],
+            'accelerometerZ' => $sensorData['accelerometerZ'],
+            'name' => $sensorData['name'],
             //'gender_name' => $trip['gender_name'],
             'model_name' => $trip['model_name'],
         ];;
         for ($i=0; $i <count($res['TripID']); $i++) {
 
             $trip->each(function($trip){
-                $t= new Trip();
+                //$t= new Trip();
                 $sD= new SensorData();
-                $t-> trip_id = $trip["TripID"];
+                $sD-> id_trip = $trip["id_trip"];
                 //$t-> user_id_user = $trip["user_id_user"];
                 //$t-> sensorTimestamp = $trip["SensorTimestamp"];
                 $sD-> timestamp_API = $trip["timestamp_API"];
@@ -59,11 +59,10 @@ class TripController extends Controller
                 $sD-> accelerometerX = $trip["accelerometerX"];
                 $sD-> accelerometerY = $trip["accelerometerY"];
                 $sD-> accelerometerZ = $trip["accelerometerZ"];
-                $t-> name = $trip["name"];
+                //$t-> name = $trip["name"];
                 //$t-> gender_name = $trip["gender_name"];
-                $t-> model_name = $trip["model_name"];
-                $t-> save();
-                $sD-> save();
+                //$t-> model_name = $trip["model_name"]
+                return $sD;
             });
         }
     
